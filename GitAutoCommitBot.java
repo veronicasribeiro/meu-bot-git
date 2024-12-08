@@ -7,7 +7,9 @@ public class GitAutoCommitBot {
     private static void executarComando(String comando) throws IOException {
         Process process = Runtime.getRuntime().exec(comando);
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+        // Garantir que a leitura seja feita em UTF-8
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream(), "UTF-8"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 System.out.println(linha);
@@ -42,6 +44,5 @@ public class GitAutoCommitBot {
         }
     }
 }
-
 
 
