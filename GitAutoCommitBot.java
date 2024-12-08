@@ -4,11 +4,9 @@ import java.io.IOException;
 
 public class GitAutoCommitBot {
 
-    // Método para executar comandos e exibir o resultado
     private static void executarComando(String comando) throws IOException {
         Process process = Runtime.getRuntime().exec(comando);
 
-        // Ler e imprimir a saída do comando
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -19,7 +17,6 @@ public class GitAutoCommitBot {
 
     public static void main(String[] args) {
         try {
-            // Caminho do repositório
             String diretorio = "C:/Users/User/meu-bot-git";
 
             // Passo 1: Adicionar arquivos ao stage
@@ -33,11 +30,18 @@ public class GitAutoCommitBot {
             System.out.println("Executando: " + comandoGitCommit);
             executarComando(comandoGitCommit);
 
-            System.out.println("Commit realizado com sucesso!");
+            // Passo 3: Fazer o push
+            String comandoGitPush = "cmd /c cd " + diretorio + " && git push origin main";
+            System.out.println("Executando: " + comandoGitPush);
+            executarComando(comandoGitPush);
+
+            System.out.println("Push realizado com sucesso!");
 
         } catch (IOException e) {
             System.err.println("Erro ao executar o comando: " + e.getMessage());
         }
     }
 }
+
+
 
